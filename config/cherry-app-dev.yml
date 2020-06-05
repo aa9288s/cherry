@@ -76,6 +76,10 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
+  cloud:
+    config:
+      override-none: true
+      override-system-properties: false
 
 feign:
   client:
