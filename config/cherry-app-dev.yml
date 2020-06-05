@@ -1,0 +1,106 @@
+server:
+  port: 8083
+  servlet:
+    session:
+      cookie:
+        name: CHERRY_CLOUD_COOKIE
+  tomcat:
+    uri-encoding: utf-8
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+  client:
+    service-url.defaultZone: http://localhost:9100/eureka/
+
+spring:
+  application:
+    name: cherry-app
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+  session:
+    store-type: redis
+    timeout: 1800
+  cache:
+    type: redis
+    redis:
+      time-to-live: 12h
+  redis:
+    host: 122.112.176.71
+    password: qygw@852
+    port: 6379
+    timeout: 3600
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  activemq:
+    in-memory: false
+    broker-url: tcp://127.0.0.1:61616
+    user: admin
+    password: admin
+    close-timeout: 30
+    send-timeout: 30
+    pool:
+      enabled: true
+      max-connections: 50
+    packages:
+      trust-all: true
+  jms:
+    pub-sub-domain: true
+  datasource:
+    url: jdbc:mysql://122.112.176.71:3306/db_cloud?useSSL=false&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true
+    username: root
+    password: Yzd@123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      initial-size: 8
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runsMillis: 60000
+      min-evictable-idle-timeMillis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      max-pool-prepared-statement-per-connection-size: 20
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      use-global-data-source-stat: true
+
+feign:
+  client:
+    config.default:
+      connectTimeout: 60000
+      readTimeout: 6000
+  hystrix:
+    enabled: true
+
+mybatis:
+  mapper-locations: classpath*:com/cherry/cloud/**/mapper/*Mapper.xml
+  type-aliases-package: com.cherry.cloud.**.dto
+  configuration:
+    map-underscore-to-camel-case: true
+
+mapper:
+  mappers: com.cherry.cloud.orm.dao.Repository
+  identity: mysql
+  not-empty: false
+  enum-as-simple-type: true
+  use-java-type: false
+
+pagehelper:
+  helperDialect: mysql
+  params: count=coutSql
+  support-methods-arguments: true
+  reasonable: true
+  page-size-zero: 0
