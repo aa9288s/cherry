@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: cherry-config-center-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/aa9288s/cherry-cloud.git
+          username: aa9288s
+          password: aa318999745
+          default-label: master
+          search-paths: config
