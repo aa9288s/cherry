@@ -1,8 +1,15 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9100/eureka/
+
 spring:
   application:
     name: cherry-app
   cloud:
     config:
-      uri: http://localhost:9000/
       label: master
       profile: dev
+      discovery:
+        enabled: true
+        service-id: cherry-config-center-server
